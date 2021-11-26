@@ -1,7 +1,7 @@
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Poll, Vote} from "../_models/Poll";
 import {Injectable} from "@angular/core";
-import {AddVote, SetPoll} from "../_actions/poll.action";
+import {AddVote, ResetState, SetPoll} from "../_actions/poll.action";
 
 export class PollStateModel {
   poll: Poll = {question: '', choices: []};
@@ -56,5 +56,13 @@ export class PollState {
         votes: [...state.votes, vote],
       });
     }
+  }
+
+  @Action(ResetState)
+  resetState({setState}: StateContext<PollStateModel>) {
+    setState({
+      poll: {question: '', choices: []},
+      votes: []
+    })
   }
 }

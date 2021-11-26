@@ -3,9 +3,11 @@
     <div class="card-body">
       <form [formGroup]="pollForm">
         <div class="form-group">
-          <label for="question">Question</label>
-          <input type="text" class="form-control" id="question"
-                 formControlName="question">
+          <fieldset [disabled]="f.question.errors?.maxlength">
+            <label for="question">Question</label>
+            <input type="text" class="form-control" id="question"
+                   formControlName="question">
+          </fieldset>
           <small id="questionHelp" class="form-text text-muted">Max 80 characters.</small>
         </div>
         <ng-container formArrayName="choices">
@@ -14,9 +16,11 @@
               <div class="form-group">
                 <label [for]="'choice-'+i">Choice</label>
                 <div class="input-group">
+                  <fieldset [disabled]="choice.get('text')?.errors?.maxlength">
                   <input type="text" class="form-control" [id]="'choice-'+i"
                          aria-describedby="choiceHelp"
                          formControlName="text">
+                  </fieldset>
                   <div class="input-group-append">
                     <ng-container *ngIf="last && choices.length < 10; else remove">
                       <button class="btn btn-outline-secondary"
