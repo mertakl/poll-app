@@ -5,12 +5,8 @@ export interface Poll {
 
 export interface Choice {
   id: string;
-  text: string;
-}
-
-export interface Vote {
-  id: string;
   name: string;
+  //Vote count
   value: number;
 }
 

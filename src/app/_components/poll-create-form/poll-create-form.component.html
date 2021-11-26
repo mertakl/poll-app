@@ -1,7 +1,7 @@
 <div class="container">
   <div class="card">
     <div class="card-body">
-      <form [formGroup]="pollForm">
+      <form [formGroup]="pollForm" ngxsForm='pollForm.poll'>
         <div class="form-group">
           <fieldset [disabled]="f.question.errors?.maxlength">
             <label for="question">Question</label>
@@ -16,10 +16,10 @@
               <div class="form-group">
                 <label [for]="'choice-'+i">Choice</label>
                 <div class="input-group">
-                  <fieldset [disabled]="choice.get('text')?.errors?.maxlength">
-                  <input type="text" class="form-control" [id]="'choice-'+i"
-                         aria-describedby="choiceHelp"
-                         formControlName="text">
+                  <fieldset [disabled]="choice.get('name')?.errors?.maxlength">
+                    <input type="text" class="form-control" [id]="'choice-'+i"
+                           aria-describedby="choiceHelp"
+                           formControlName="name">
                   </fieldset>
                   <div class="input-group-append">
                     <ng-container *ngIf="last && choices.length < 10; else remove">

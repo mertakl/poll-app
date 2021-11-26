@@ -1,20 +1,16 @@
-import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngxs/store";
 import * as uuid from 'uuid';
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ResetState, SetPoll} from "../../_actions/poll.action";
-import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-poll-create-form',
   templateUrl: './poll-create-form.component.html',
   styleUrls: ['./poll-create-form.component.css']
 })
-export class PollCreateFormComponent implements OnInit, AfterViewInit, OnDestroy {
+export class PollCreateFormComponent implements OnInit {
 
   pollForm!: FormGroup;
-
-  formChangesSubscription: Subscription = new Subscription();
 
   constructor(private store: Store,
               private formBuilder: FormBuilder) {
@@ -34,14 +30,9 @@ export class PollCreateFormComponent implements OnInit, AfterViewInit, OnDestroy
   createChoice(): FormGroup {
     return this.formBuilder.group({
       id: [uuid.v4()],
-      text: ['', Validators.maxLength(80)]
+      name: ['', Validators.maxLength(80)],
+      value: [0]
     });
-  }
-
-  ngAfterViewInit(): void {
-    this.formChangesSubscription = this.pollForm.valueChanges.subscribe(form => {
-      this.store.dispatch(new SetPoll(form));
-    })
   }
 
   addNewChoice() {
@@ -59,15 +50,11 @@ export class PollCreateFormComponent implements OnInit, AfterViewInit, OnDestroy
   reset() {
     this.choices.clear();
     this.pollForm.reset();
-    this.store.dispatch(new ResetState());
+    this.store.reset([]);
     this.addNewChoice();
   }
 
   get f() {
     return this.pollForm.controls;
-  }
-
-  ngOnDestroy() {
-    this.formChangesSubscription.unsubscribe();
   }
 }

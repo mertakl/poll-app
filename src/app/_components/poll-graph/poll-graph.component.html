@@ -1,9 +1,9 @@
-<div class="container" *ngIf="votes$ | async; let votes">
+<div class="container" *ngIf="choices$ | async; let choices">
   <div #containerRef>
     <ngx-charts-bar-vertical
       [view]="[containerRef.offsetWidth, 400]"
       [scheme]="colorScheme"
-      [results]="votes"
+      [results]="choices"
       [gradient]="gradient"
       [xAxis]="showXAxis"
       [yAxis]="showYAxis"

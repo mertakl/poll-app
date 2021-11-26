@@ -3,7 +3,7 @@ import {ScaleType} from "@swimlane/ngx-charts";
 import {Select} from "@ngxs/store";
 import {PollState} from "../../_states/poll.state";
 import {Observable} from "rxjs";
-import {Vote} from "../../_models/Poll";
+import {Choice} from "../../_models/Poll";
 
 @Component({
   selector: 'app-poll-graph',
@@ -12,7 +12,7 @@ import {Vote} from "../../_models/Poll";
 })
 export class PollGraphComponent implements OnInit {
 
-  @Select(PollState.getVotes) votes$: Observable<Vote[]> | undefined;
+  @Select(PollState.getChoices) choices$: Observable<Choice[]> | undefined;
 
   showXAxis = true;
   showYAxis = true;

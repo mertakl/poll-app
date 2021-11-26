@@ -8,12 +8,12 @@
         <br>
         <div class="col">
           <ng-container *ngFor="let choice of poll.choices; let i = index; trackBy: trackBy">
-            <div class="radio" *ngIf="choice.text">
+            <div class="radio" *ngIf="choice.name">
               <label [for]="'choice-' + i" class="form-check-label"> </label>
               <input class="form-check-input" name="choice"
                      [value]="choice.id" type="radio" [id]="'choice-' + i"
                      [(ngModel)]="selectedChoice">
-              {{choice.text}}
+              {{choice.name}}
             </div>
           </ng-container>
         </div>

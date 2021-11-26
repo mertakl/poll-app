@@ -14,6 +14,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {PollState} from "./_states/poll.state";
 import {environment} from "../environments/environment";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {NgxsFormPluginModule} from "@ngxs/form-plugin";
 
 @NgModule({
   declarations: [
@@ -23,16 +24,17 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     PollVoteFormComponent,
     PollGraphComponent
   ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        NgxsModule.forRoot([PollState], {developmentMode: !environment.production}),
-        NgxsReduxDevtoolsPluginModule.forRoot(),
-        NgxsLoggerPluginModule.forRoot(),
-        BarChartModule,
-        FormsModule,
-        ReactiveFormsModule,
-    ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    NgxsModule.forRoot([PollState], {developmentMode: !environment.production}),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+    NgxsLoggerPluginModule.forRoot(),
+    NgxsFormPluginModule.forRoot(),
+    BarChartModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
