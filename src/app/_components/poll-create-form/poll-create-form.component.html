@@ -1,17 +1,46 @@
 <div class="container">
-  <form>
-    <div class="form-group">
-      <label for="question">Question</label>
-      <input type="text" class="form-control" id="question" aria-describedby="questionHelp"
-             placeholder="Enter question">
-      <small id="questionHelp" class="form-text text-muted">Max 80 characters.</small>
+  <div class="card">
+    <div class="card-body">
+      <form [formGroup]="pollForm">
+        <div class="form-group">
+          <label for="question">Question</label>
+          <input type="text" class="form-control" id="question"
+                 formControlName="question">
+          <small id="questionHelp" class="form-text text-muted">Max 80 characters.</small>
+        </div>
+        <ng-container formArrayName="choices">
+          <div *ngFor="let choice of choices.controls; let i=index; let last = last;">
+            <ng-container [formGroupName]="i">
+              <div class="form-group">
+                <label [for]="'choice-'+i">Choice</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" [id]="'choice-'+i"
+                         aria-describedby="choiceHelp"
+                         formControlName="text">
+                  <div class="input-group-append">
+                    <ng-container *ngIf="last && choices.length < 10; else remove">
+                      <button class="btn btn-outline-secondary"
+                              type="button" (click)="addNewChoice()">
+                        <i class="ri-add-line"></i>
+                      </button>
+                    </ng-container>
+                    <ng-template #remove>
+                      <button class="btn btn-outline-secondary"
+                              type="button" (click)="removeChoice(i)">
+                        <i class="ri-close-line"></i>
+                      </button>
+                    </ng-template>
+                  </div>
+                </div>
+                <small id="choiceHelp" class="form-text text-muted">Max 80 characters.</small>
+              </div>
+            </ng-container>
+          </div>
+        </ng-container>
+      </form>
     </div>
-    <div class="form-group">
-      <label for="choice">Choice</label>
-      <input type="text" class="form-control" id="choice" aria-describedby="choiceHelp"
-             placeholder="Enter choice">
-      <small id="choiceHelp" class="form-text text-muted">Max 80 characters.</small>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+  </div>
+  <div class="btn-holder">
+    <button type="submit" class="btn btn-outline-secondary">Reset</button>
+  </div>
 </div>

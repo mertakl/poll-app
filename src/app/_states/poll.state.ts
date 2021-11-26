@@ -1,17 +1,19 @@
 import {Action, Selector, State, StateContext} from '@ngxs/store';
-import {Poll} from "../_models/Poll";
+import {Poll, Vote} from "../_models/Poll";
 import {Injectable} from "@angular/core";
-import {AddChoice, DeleteChoice, UpdateChoice, UpdatePoll} from "../_actions/poll.action";
+import {AddVote, SetPoll} from "../_actions/poll.action";
 
 export class PollStateModel {
   poll: Poll = {question: '', choices: []};
+  votes: Vote[] = [];
 }
 
 @Injectable()
 @State<PollStateModel>({
   name: 'poll',
   defaults: {
-    poll: {question: '', choices: []}
+    poll: {question: '', choices: []},
+    votes: []
   }
 })
 export class PollState {
@@ -21,8 +23,8 @@ export class PollState {
     return state.poll;
   }
 
-  @Action(UpdatePoll)
-  updatePoll({getState, setState}: StateContext<PollStateModel>, {payload}: UpdatePoll) {
+  @Action(SetPoll)
+  updatePoll({getState, setState}: StateContext<PollStateModel>, {payload}: SetPoll) {
     const state = getState();
     setState({
       ...state,
@@ -30,35 +32,12 @@ export class PollState {
     });
   }
 
-  @Action(AddChoice)
-  addChoice({getState, patchState}: StateContext<PollStateModel>, {payload}: AddChoice) {
+  @Action(AddVote)
+  addVote({getState, setState}: StateContext<PollStateModel>, {payload}: AddVote) {
     const state = getState();
-    const choices = state.poll.choices;
-    patchState({
-      poll: {...state.poll, choices: [...choices, payload]}
-    });
-  }
-
-  @Action(UpdateChoice)
-  updateChoice({getState, setState}: StateContext<PollStateModel>, {payload, id}: UpdateChoice) {
-    const state = getState();
-    const choiceList = [...state.poll.choices];
-    const choiceIndex = choiceList.findIndex(item => item.id === id);
-    choiceList[choiceIndex] = payload;
     setState({
       ...state,
-      poll: {...state.poll, choices: [...choiceList]}
-    });
-  }
-
-
-  @Action(DeleteChoice)
-  deleteChoice({getState, setState}: StateContext<PollStateModel>, {id}: DeleteChoice) {
-    const state = getState();
-    const filtered = state.poll.choices.filter(item => item.id !== id);
-    setState({
-      ...state,
-      poll: {...state.poll, choices: [...filtered]}
+      //votes: [...state.votes, payload],
     });
   }
 }

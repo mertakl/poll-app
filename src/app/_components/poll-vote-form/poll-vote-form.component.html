@@ -1,19 +1,25 @@
-<div class="container">
+<div class="container" *ngIf="poll$ | async; let poll">
   <form>
-    <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-             placeholder="Enter email">
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-    </div>
-    <div class="form-group form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-      <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <fieldset>
+      <div class="form-group">
+        <h3 class="control-label" id="q1">
+          {{poll?.question}}
+        </h3>
+        <br>
+        <div class="col">
+          <ng-container *ngFor="let choice of poll.choices; let i = index; trackBy: trackBy">
+            <div class="radio">
+              <label [for]="'choice-' + i" class="form-check-label">
+                <input class="form-check-input" name="choices" [value]="choice.id" type="radio" [id]="'choice-' + i">
+                {{choice.text}}
+              </label>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </fieldset>
   </form>
+  <div class="btn-holder">
+    <button type="submit" class="btn btn-outline-secondary">Vote</button>
+  </div>
 </div>

@@ -4,7 +4,13 @@ export interface Poll {
 }
 
 export interface Choice {
-  id: number;
+  id: string;
   text: string;
+}
+
+export interface Vote {
+  id: string;
+  text: string;
+  count: number;
 }
 
