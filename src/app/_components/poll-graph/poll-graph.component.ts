@@ -1,5 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ScaleType} from "@swimlane/ngx-charts";
+import {Select} from "@ngxs/store";
+import {PollState} from "../../_states/poll.state";
+import {Observable} from "rxjs";
+import {Vote} from "../../_models/Poll";
 
 @Component({
   selector: 'app-poll-graph',
@@ -7,6 +11,9 @@ import {ScaleType} from "@swimlane/ngx-charts";
   styleUrls: ['./poll-graph.component.css']
 })
 export class PollGraphComponent implements OnInit {
+
+  @Select(PollState.getVotes) votes$: Observable<Vote[]> | undefined;
+
   showXAxis = true;
   showYAxis = true;
   gradient = true;
@@ -22,33 +29,9 @@ export class PollGraphComponent implements OnInit {
     domain: ['#9370DB', '#87CEFA', '#FA8072', '#FF7F50', '#90EE90', '#9370DB']
   };
 
-  public single = [
-    {
-      "name": "Test Choice",
-      "value": 1
-    },
-    {
-      "name": "Test Choice 2",
-      "value": 2
-    },
-    {
-      "name": "Test Choice 3",
-      "value": 3
-    },
-    {
-      "name": "Test Choice 4",
-      "value": 4
-    },
-    {
-      "name": "Test Choice 5",
-      "value": 5
-    }
-  ];
-
   constructor() {
   }
 
   ngOnInit(): void {
   }
-
 }

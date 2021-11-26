@@ -1,4 +1,4 @@
-import {Choice, Poll} from "../_models/Poll";
+import {Poll} from "../_models/Poll";
 
 export class SetPoll {
   static readonly type = '[Poll] Set';
@@ -10,6 +10,6 @@ export class SetPoll {
 export class AddVote {
   static readonly type = '[Vote] Add';
 
-  constructor(public payload: Choice) {
+  constructor(public id: string | undefined) {
   }
 }

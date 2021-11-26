@@ -23,6 +23,11 @@ export class PollState {
     return state.poll;
   }
 
+  @Selector()
+  static getVotes(state: PollStateModel) {
+    return state.votes;
+  }
+
   @Action(SetPoll)
   updatePoll({getState, setState}: StateContext<PollStateModel>, {payload}: SetPoll) {
     const state = getState();
@@ -33,11 +38,23 @@ export class PollState {
   }
 
   @Action(AddVote)
-  addVote({getState, setState}: StateContext<PollStateModel>, {payload}: AddVote) {
+  addVote({getState, setState}: StateContext<PollStateModel>, {id}: AddVote) {
     const state = getState();
-    setState({
-      ...state,
-      //votes: [...state.votes, payload],
-    });
+    const voteList = [...state.votes];
+    const voteIndex = voteList.findIndex(v => v.id === id);
+    if (voteIndex >= 0) {
+      voteList[voteIndex] = {...voteList[voteIndex], value: voteList[voteIndex].value + 1};
+      setState({
+        ...state,
+        votes: voteList,
+      });
+    } else {
+      const choice = state.poll.choices.find(c => c.id === id);
+      const vote = {id: choice?.id, name: choice?.text, value: 1} as Vote;
+      setState({
+        ...state,
+        votes: [...state.votes, vote],
+      });
+    }
   }
 }

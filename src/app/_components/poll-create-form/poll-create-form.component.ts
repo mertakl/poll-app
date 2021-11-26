@@ -20,6 +20,10 @@ export class PollCreateFormComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   ngOnInit(): void {
+    this.initializeForm();
+  }
+
+  initializeForm(): void {
     this.pollForm = this.formBuilder.group({
       question: [''],
       choices: this.formBuilder.array([this.createChoice()])
@@ -49,6 +53,12 @@ export class PollCreateFormComponent implements OnInit, AfterViewInit, OnDestroy
 
   get choices(): FormArray {
     return this.pollForm.get("choices") as FormArray
+  }
+
+  reset() {
+    this.store.reset([]);
+    this.pollForm.reset();
+    this.initializeForm();
   }
 
   ngOnDestroy() {

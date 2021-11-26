@@ -10,7 +10,7 @@ export interface Choice {
 
 export interface Vote {
   id: string;
-  text: string;
-  count: number;
+  name: string;
+  value: number;
 }
 
