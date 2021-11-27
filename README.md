@@ -34,7 +34,7 @@ https://my-awesome-poll-app.netlify.app/
 You will be able to create new poll. When you are typing, you will see question and answers will change in realtime.
 Whenever user selects a choice and clicks on "Vote" button, graph will automatically be updated. In order to vote, 
 at least two choices must be created. 
-User cannot type more 80 characters on input fields. If they type, the field will be disabled.
+User cannot type more than 80 characters on input fields. If they type, the field will be disabled.
 
 ## Building
 In order to build the application run;
