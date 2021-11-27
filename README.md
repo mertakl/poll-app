@@ -32,7 +32,8 @@ https://my-awesome-poll-app.netlify.app/
 ## Using the site
 You will be able to create new poll. When you are typing, you will see question and answers will change in realtime.
 Whenever user selects a choice and clicks on "Vote" button, graph will automatically be updated. In order to vote, 
-at least two choices must be created.
+at least two choices must be created. 
+User cannot type more 80 characters on input fields. If they type, the field will be disabled.
 
 ## Building
 In order to build the application run;
@@ -50,7 +51,7 @@ In order to run e2e tests, issue the following command;
 ```shell
 npm run e2e
 ```
-A new browser window will open. From that window click on poll.spec.ts. Another window will open
+A new browser window will open. From that window, click on poll.spec.ts. Another window will open
 and tests will run.
 
 
