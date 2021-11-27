@@ -1,5 +1,6 @@
 # My Awesome Poll App
 This is a client side only poll application. Built with angular, and for state management ngxs has been used.
+Also for the chart, ngx-charts is used.
 
 ## Downloading the project
 To start the project please clone the project with your command-line/terminal of choice:
