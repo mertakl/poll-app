@@ -1,27 +1,56 @@
-# PollApp
+# My Awesome Poll App
+This is a client side only poll application. Built with angular, and for state management ngxs has been used.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.11.
+## Downloading the project
+To start the project please clone the project with your command-line/terminal of choice:
+```git clone https://github.com/mertakl/poll-app.git```
 
-## Development server
+## Running the project
+To run the project:
+Go to the following directory from the current root:
+```shell
+cd ./poll-app
+```
+Install the packages:
+```shell
+npm install
+```
+Then run with following command:
+```shell
+npm run start
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+The application will be available on :
+```
+http://127.0.0.1:4200/
+```
+Or alternatively, if you want to access the deployed application. You can access it from the following url;
+```
+https://my-awesome-poll-app.netlify.app/
+```
 
-## Code scaffolding
+## Using the site
+You will be able to create new poll. When you are typing, you will see question and answers will change in realtime.
+Whenever user selects a choice and clicks on "Vote" button, graph will automatically be updated. In order to vote, 
+at least two choices must be created.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Building
+In order to build the application run;
+```shell
+npm run build
+```
+A build will be generated inside;
+```
+./poll-app/dist/poll-app
+```
+You can copy files within this folder and put them inside your server.
 
-## Build
+## Running e2e tests
+In order to run e2e tests, issue the following command;
+```shell
+npm run e2e
+```
+A new browser window will open. From that window click on poll.spec.ts. Another window will open
+and tests will run.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

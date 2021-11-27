@@ -13,7 +13,7 @@
           <div *ngFor="let choice of choices.controls; let i=index; let last = last;">
             <ng-container [formGroupName]="i">
               <div class="form-group">
-                <label [for]="'choice-'+i">Choice</label>
+                <label [for]="'choice-'+i">Choice {{i + 1}}</label>
                 <div class="input-group">
                   <input type="text" class="form-control"
                          [id]="'choice-'+i"
