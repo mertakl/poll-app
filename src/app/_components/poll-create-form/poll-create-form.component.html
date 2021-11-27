@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="card">
+  <div class="card shadow-lg mb-3">
     <div class="card-body">
       <form [formGroup]="pollForm" ngxsForm='pollForm.poll'>
         <div class="form-group">
@@ -44,7 +44,8 @@
       </form>
     </div>
   </div>
-  <div class="btn-holder">
+  <div class="d-flex mt-auto">
+    <p class="small me-auto">{{10 - choices.length}} /10 Possible answers</p>
     <button type="button" class="btn btn-outline-secondary" (click)="reset()">Reset</button>
   </div>
 </div>

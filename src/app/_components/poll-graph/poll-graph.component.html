@@ -1,17 +1,21 @@
 <div class="container" *ngIf="choices$ | async; let choices">
-  <div #containerRef>
-    <ngx-charts-bar-vertical
-      [view]="[containerRef.offsetWidth, 400]"
-      [scheme]="colorScheme"
-      [results]="choices"
-      [gradient]="gradient"
-      [xAxis]="showXAxis"
-      [yAxis]="showYAxis"
-      [legend]="showLegend"
-      [showXAxisLabel]="showXAxisLabel"
-      [showYAxisLabel]="showYAxisLabel"
-      [xAxisLabel]="xAxisLabel"
-      [yAxisLabel]="yAxisLabel">
-    </ngx-charts-bar-vertical>
+  <div class="card shadow-lg">
+    <div class="card-body">
+      <div #containerRef>
+        <ngx-charts-bar-vertical
+          [view]="[containerRef.offsetWidth, 400]"
+          [scheme]="colorScheme"
+          [results]="choices"
+          [gradient]="gradient"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [legend]="showLegend"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel">
+        </ngx-charts-bar-vertical>
+      </div>
+    </div>
   </div>
 </div>
