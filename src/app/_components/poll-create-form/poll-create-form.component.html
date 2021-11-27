@@ -3,11 +3,10 @@
     <div class="card-body">
       <form [formGroup]="pollForm" ngxsForm='pollForm.poll'>
         <div class="form-group">
-          <fieldset [disabled]="f.question.errors?.maxlength">
-            <label for="question">Question</label>
-            <input type="text" class="form-control" id="question"
-                   formControlName="question">
-          </fieldset>
+          <label for="question">Question</label>
+          <input type="text" class="form-control" id="question"
+                 [attr.disabled]="f.question.errors?.maxlength"
+                 formControlName="question">
           <small id="questionHelp" class="form-text text-muted">Max 80 characters.</small>
         </div>
         <ng-container formArrayName="choices">
@@ -16,20 +15,20 @@
               <div class="form-group">
                 <label [for]="'choice-'+i">Choice</label>
                 <div class="input-group">
-                  <fieldset [disabled]="choice.get('name')?.errors?.maxlength">
-                    <input type="text" class="form-control" [id]="'choice-'+i"
-                           aria-describedby="choiceHelp"
-                           formControlName="name">
-                  </fieldset>
+                  <input type="text" class="form-control"
+                         [id]="'choice-'+i"
+                         [attr.disabled]="choice.get('name')?.errors?.maxlength"
+                         aria-describedby="choiceHelp"
+                         formControlName="name">
                   <div class="input-group-append">
                     <ng-container *ngIf="last && choices.length < 10; else remove">
-                      <button class="btn btn-outline-secondary"
+                      <button class="btn btn-outline-secondary" id="addChoiceBtn"
                               type="button" (click)="addNewChoice()">
                         <i class="ri-add-line"></i>
                       </button>
                     </ng-container>
                     <ng-template #remove>
-                      <button class="btn btn-outline-secondary"
+                      <button class="btn btn-outline-secondary" id="removeChoiceBtn"
                               type="button" (click)="removeChoice(i)">
                         <i class="ri-close-line"></i>
                       </button>
@@ -46,6 +45,8 @@
   </div>
   <div class="d-flex mt-auto">
     <p class="small me-auto">{{10 - choices.length}} /10 Possible answers</p>
-    <button type="button" class="btn btn-outline-secondary" (click)="reset()">Reset</button>
+    <button type="button" class="btn btn-outline-secondary" id="resetBtn" (click)="reset()">
+      Reset
+    </button>
   </div>
 </div>

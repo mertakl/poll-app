@@ -31,11 +31,11 @@ export class PollState {
     const state = getState();
     const choiceList = [...state.poll.model.choices];
     const choiceIndex = choiceList.findIndex(c => c.id === id);
-    choiceList[choiceIndex] = {...choiceList[choiceIndex], value: choiceList[choiceIndex].value + 1};
-    const model = {choices: choiceList};
+    const choice = choiceList[choiceIndex];
+    choiceList[choiceIndex] = {...choice, value: choice.value + 1};
     setState({
       ...state,
-      poll: {...state.poll.model, model},
+      poll: {...state.poll, model: {choices: choiceList}},
     });
   }
 }

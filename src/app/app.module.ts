@@ -28,8 +28,6 @@ import {NgxsFormPluginModule} from "@ngxs/form-plugin";
     BrowserModule,
     BrowserAnimationsModule,
     NgxsModule.forRoot([PollState], {developmentMode: !environment.production}),
-    NgxsReduxDevtoolsPluginModule.forRoot(),
-    NgxsLoggerPluginModule.forRoot(),
     NgxsFormPluginModule.forRoot(),
     BarChartModule,
     FormsModule,
