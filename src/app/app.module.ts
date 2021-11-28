@@ -29,6 +29,7 @@ import {NgxsFormPluginModule} from "@ngxs/form-plugin";
     BrowserAnimationsModule,
     NgxsModule.forRoot([PollState], {developmentMode: !environment.production}),
     NgxsFormPluginModule.forRoot(),
+    NgxsLoggerPluginModule.forRoot({disabled: environment.production}),
     BarChartModule,
     FormsModule,
     ReactiveFormsModule,

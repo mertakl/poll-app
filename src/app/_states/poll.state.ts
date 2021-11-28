@@ -1,13 +1,18 @@
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from "@angular/core";
 import {AddVote} from "../_actions/poll.action";
+import {Choice, Poll} from "../_models/Poll";
+
+export interface PollStateModel {
+  poll: { model: { choices: Choice[] } };
+}
 
 @Injectable()
 @State({
   name: 'pollForm',
   defaults: {
     poll: {
-      model: [],
+      model: [{} as Poll],
       dirty: false,
       status: '',
       errors: {}
@@ -17,17 +22,17 @@ import {AddVote} from "../_actions/poll.action";
 export class PollState {
 
   @Selector()
-  static getPoll(state: any) {
+  static getPoll(state: PollStateModel) {
     return state.poll.model;
   }
 
   @Selector()
-  static getChoices(state: any) {
+  static getChoices(state: PollStateModel) {
     return state.poll.model.choices;
   }
 
   @Action(AddVote)
-  addVote({getState, setState}: StateContext<any>, {id}: AddVote) {
+  addVote({getState, setState}: StateContext<PollStateModel>, {id}: AddVote) {
     const state = getState();
     const choiceList = [...state.poll.model.choices];
     const choiceIndex = choiceList.findIndex(c => c.id === id);
@@ -35,7 +40,7 @@ export class PollState {
     choiceList[choiceIndex] = {...choice, value: choice.value + 1};
     setState({
       ...state,
-      poll: {...state.poll, model: {choices: choiceList}},
+      poll: {...state.poll.model, model: {choices: choiceList}},
     });
   }
 }
