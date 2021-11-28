@@ -14,6 +14,8 @@ export class PollGraphComponent implements OnInit {
 
   @Select(PollState.getChoices) choices$: Observable<Choice[]> | undefined;
 
+  totalVotes: number = 0;
+
   showXAxis = true;
   showYAxis = true;
   gradient = true;
@@ -33,5 +35,8 @@ export class PollGraphComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.choices$?.subscribe(result => {
+      this.totalVotes = result?.reduce((n, {value}) => n + value, 0);
+    });
   }
 }
