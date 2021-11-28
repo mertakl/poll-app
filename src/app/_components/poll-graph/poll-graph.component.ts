@@ -2,8 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {ScaleType} from "@swimlane/ngx-charts";
 import {Select} from "@ngxs/store";
 import {PollState} from "../../_states/poll.state";
-import {Observable} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import {Choice} from "../../_models/Poll";
+import {takeUntil} from "rxjs/operators";
 
 @Component({
   selector: 'app-poll-graph',
@@ -11,6 +12,8 @@ import {Choice} from "../../_models/Poll";
   styleUrls: ['./poll-graph.component.css']
 })
 export class PollGraphComponent implements OnInit {
+
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   @Select(PollState.getChoices) choices$: Observable<Choice[]> | undefined;
 
@@ -35,8 +38,13 @@ export class PollGraphComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.choices$?.subscribe(result => {
+    this.choices$?.pipe(takeUntil(this.destroy$)).subscribe(result => {
       this.totalVotes = result?.reduce((n, {value}) => n + value, 0);
     });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 }
