@@ -4,7 +4,9 @@ Also for the chart, ngx-charts is used.
 
 ## Downloading the project
 To start the project please clone the project with your command-line/terminal of choice:
-```shell git clone https://github.com/mertakl/poll-app.git```
+```shell 
+git clone https://github.com/mertakl/poll-app.git
+```
 
 ## Running the project
 To run the project:
